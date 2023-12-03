@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shared Countdown</title>
+  <style>
+    /* Add your styles here */
+  </style>
+</head>
+<body>
+  <h1 id="shared-event-name"></h1>
+  <div id="shared-countdown"></div>
+  <button onclick="goToIndexPage()">Create Your Own Countdown</button>
+
+  <script>
+    // Add your JavaScript code here
+
+    document.addEventListener("DOMContentLoaded", function () {
+  // Get countdown data from URL parameters
+  const params = new URLSearchParams(window.location.search);
+  const sharedCountdownDate = params.get('countdownDate');
+  const sharedEventName = params.get('eventName');
+
+  if (sharedCountdownDate && sharedEventName) {
+    // Convert countdown date to milliseconds
+    const countdownDate = parseInt(sharedCountdownDate, 10);
+
+    // Update event name on the page
+    document.getElementById("shared-event-name").innerText = sharedEventName;
+
+    // Start the countdown
+    startCountdown(countdownDate);
+  } else {
+    // If no countdown data in the URL, redirect to the index page
+    window.location.href = "index.html";
+  }
+
+  function startCountdown(countdownDate) {
+    // Update the countdown every second
+    setInterval(function () {
+      const now = new Date().getTime();
+      const distance = countdownDate - now;
+
+      if (distance <= 0) {
+        // If countdown has reached zero, display completion message
+        document.getElementById("shared-countdown").innerHTML = "Countdown Complete!";
+      } else {
+        // If countdown is still ongoing, calculate and display the remaining time
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the countdown
+        document.getElementById("shared-countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+    }, 1000);
+  }
+
+  // Function to navigate to the index page
+  function goToIndexPage() {
+    window.location.href = "index.html";
+  }
+});
+
+  </script>
+</body>
+</html>

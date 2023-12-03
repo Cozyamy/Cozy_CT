@@ -20,16 +20,19 @@ document.addEventListener("DOMContentLoaded", function () {
       countdownDate = new Date(savedEvent.date).getTime();
       eventName = savedEvent.name;
 
-      // Populate input fields with saved data
+      // Populate input fields with saved data (for the index page)
       document.getElementById("event-name-input").value = eventName;
       document.getElementById("event-date-input").valueAsDate = new Date(savedEvent.date);
 
-      // Update the displayed event name
+      // Update the displayed event name (for the index page)
       document.getElementById("event-name").innerText = eventName;
+
+      // Start the countdown (for the index page)
+      startCountdown();
     }
   }
 
-  // Save button functionality
+  // Save button functionality (for the index page)
   const saveButton = document.getElementById("save-button");
 
   saveButton.addEventListener("click", function () {
@@ -45,13 +48,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       localStorage.setItem("countdownEvent", JSON.stringify(newEvent));
 
-      // Update the displayed event name
+      // Update the displayed event name (for the index page)
       document.getElementById("event-name").innerText = newEventName;
 
-      // Update the countdown with the new date
+      // Update the countdown with the new date (for the index page)
       countdownDate = new Date(newEventDate).getTime();
 
-      // Start the countdown
+      // Start the countdown (for the index page)
       startCountdown();
     } else {
       alert("Please enter both event name and date.");
