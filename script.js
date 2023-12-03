@@ -86,7 +86,18 @@ document.addEventListener("DOMContentLoaded", function () {
           shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}&title=${encodeURIComponent(shareText)}`;
           break;
         case 'whatsapp':
-          // Create a WhatsApp share link with the current page URL and message
+          // Check if countdown data is available in the link's parameters
+          const params = new URLSearchParams(window.location.search);
+          const sharedCountdownDate = params.get('countdownDate');
+          const sharedEventName = params.get('eventName');
+  
+          if (sharedCountdownDate && sharedEventName) {
+            // Use the countdown data from the link
+            countdownDate = parseInt(sharedCountdownDate, 10);
+            eventName = sharedEventName;
+          }
+  
+          // Create a WhatsApp share link with the current countdown data and message
           shareUrl = `whatsapp://send?text=${encodeURIComponent(`${shareText} - ${pageUrl}`)}`;
           break;
         default:
@@ -100,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error(`Error sharing on ${platform}: ${error.message}`);
       alert(`Error sharing on ${platform}. Please try again.`);
     }
-  }  
+  }   
 
   function startCountdown() {
     // Update the countdown every second only if a valid countdownDate is set
