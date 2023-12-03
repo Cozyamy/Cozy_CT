@@ -2,20 +2,31 @@ document.addEventListener("DOMContentLoaded", function () {
   let countdownDate = 0;
   let eventName = "";
 
-  // Check if saved event data exists in local storage
-  const savedEvent = JSON.parse(localStorage.getItem("countdownEvent"));
+  // Check if countdown data is available in the URL parameters
+  const params = new URLSearchParams(window.location.search);
+  const sharedCountdownDate = params.get('countdownDate');
+  const sharedEventName = params.get('eventName');
 
-  if (savedEvent) {
-    // If there's a saved event, use its date
-    countdownDate = new Date(savedEvent.date).getTime();
-    eventName = savedEvent.name;
+  if (sharedCountdownDate && sharedEventName) {
+    // Use the countdown data from the URL parameters
+    countdownDate = parseInt(sharedCountdownDate, 10);
+    eventName = sharedEventName;
+  } else {
+    // If no countdown data in the URL, check if saved event data exists in local storage
+    const savedEvent = JSON.parse(localStorage.getItem("countdownEvent"));
 
-    // Populate input fields with saved data
-    document.getElementById("event-name-input").value = eventName;
-    document.getElementById("event-date-input").valueAsDate = new Date(savedEvent.date);
+    if (savedEvent) {
+      // If there's a saved event, use its date
+      countdownDate = new Date(savedEvent.date).getTime();
+      eventName = savedEvent.name;
 
-    // Update the displayed event name
-    document.getElementById("event-name").innerText = eventName;
+      // Populate input fields with saved data
+      document.getElementById("event-name-input").value = eventName;
+      document.getElementById("event-date-input").valueAsDate = new Date(savedEvent.date);
+
+      // Update the displayed event name
+      document.getElementById("event-name").innerText = eventName;
+    }
   }
 
   // Save button functionality
@@ -73,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const shareText = `Countdown to ${eventName}: ${document.getElementById("countdown").innerText}`;
     const pageUrl = window.location.href;
     let shareUrl = '';
-  
+
     try {
       switch (platform) {
         case 'facebook':
@@ -86,24 +97,13 @@ document.addEventListener("DOMContentLoaded", function () {
           shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}&title=${encodeURIComponent(shareText)}`;
           break;
         case 'whatsapp':
-          // Check if countdown data is available in the link's parameters
-          const params = new URLSearchParams(window.location.search);
-          const sharedCountdownDate = params.get('countdownDate');
-          const sharedEventName = params.get('eventName');
-  
-          if (sharedCountdownDate && sharedEventName) {
-            // Use the countdown data from the link
-            countdownDate = parseInt(sharedCountdownDate, 10);
-            eventName = sharedEventName;
-          }
-  
           // Create a WhatsApp share link with the current countdown data and message
-          shareUrl = `whatsapp://send?text=${encodeURIComponent(`${shareText} - ${pageUrl}`)}`;
+          shareUrl = `whatsapp://send?text=${encodeURIComponent(`${shareText} - ${pageUrl}?countdownDate=${countdownDate}&eventName=${eventName}`)}`;
           break;
         default:
           break;
       }
-  
+
       if (shareUrl) {
         window.open(shareUrl, "_blank");
       }
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error(`Error sharing on ${platform}: ${error.message}`);
       alert(`Error sharing on ${platform}. Please try again.`);
     }
-  }   
+  }
 
   function startCountdown() {
     // Update the countdown every second only if a valid countdownDate is set
