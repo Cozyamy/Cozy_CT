@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const facebookButton = document.getElementById("facebook-button");
   const twitterButton = document.getElementById("twitter-button");
   const linkedinButton = document.getElementById("linkedin-button");
+  const whatsappButton = document.getElementById("whatsapp-button");
 
   facebookButton.addEventListener("click", function () {
     shareOnSocialMedia("facebook");
@@ -62,6 +63,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   linkedinButton.addEventListener("click", function () {
     shareOnSocialMedia("linkedin");
+  });
+
+  whatsappButton.addEventListener("click", function () {
+    shareOnSocialMedia("whatsapp");
   });
 
   function shareOnSocialMedia(platform) {
