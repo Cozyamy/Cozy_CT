@@ -79,6 +79,9 @@ document.addEventListener("DOMContentLoaded", function () {
         case 'linkedin':
           shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(shareText)}`;
           break;
+        case 'whatsapp':
+          shareUrl = `whatsapp://send?text=${encodeURIComponent(shareText)}%0A${encodeURIComponent(window.location.href)}`;
+        break;
         default:
           break;
       }
