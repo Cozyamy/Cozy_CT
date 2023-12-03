@@ -71,26 +71,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function shareOnSocialMedia(platform) {
     const shareText = `Countdown to ${eventName}: ${document.getElementById("countdown").innerText}`;
+    const pageUrl = window.location.href;
     let shareUrl = '';
-
+  
     try {
       switch (platform) {
         case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(shareText)}`;
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}&quote=${encodeURIComponent(shareText)}`;
           break;
         case 'twitter':
-          shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}`;
           break;
         case 'linkedin':
-          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(shareText)}`;
+          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}&title=${encodeURIComponent(shareText)}`;
           break;
         case 'whatsapp':
-          shareUrl = `whatsapp://send?text=${encodeURIComponent(shareText)}%0A${encodeURIComponent(window.location.href)}`;
-        break;
+          // Create a WhatsApp share link with the current page URL and message
+          shareUrl = `whatsapp://send?text=${encodeURIComponent(`${shareText} - ${pageUrl}`)}`;
+          break;
         default:
           break;
       }
-
+  
       if (shareUrl) {
         window.open(shareUrl, "_blank");
       }
@@ -98,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error(`Error sharing on ${platform}: ${error.message}`);
       alert(`Error sharing on ${platform}. Please try again.`);
     }
-  }
+  }  
 
   function startCountdown() {
     // Update the countdown every second only if a valid countdownDate is set
