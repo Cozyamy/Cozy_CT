@@ -1,6 +1,6 @@
 # Countdown Timer
 
-A simple web application that allows users to set countdowns for events. The application is built using HTML, CSS, and JavaScript.
+A simple web application that allows users to set countdowns for events. The application is built using HTML, CSS (Tailwind CSS), and JavaScript.
 
 ## Features
 - Set countdowns for various events.
@@ -11,7 +11,7 @@ A simple web application that allows users to set countdowns for events. The app
 
 ## Demo
 
-Check out the [live demo here](https://6581f4ea1a8b8e5bec401aa3--celadon-bunny-f65ed4.netlify.app/)
+Check out the [live demo here](https://6581fdcf6717f3600617a685--willowy-starship-5b1ffd.netlify.app/)
 
 ### Installation
 1. Clone the repository:

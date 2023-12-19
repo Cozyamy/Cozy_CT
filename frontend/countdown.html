@@ -41,33 +41,33 @@
             </button>
         </nav>
     </header>
-    <section class="flex md:flex-row flex-col justify-between md:m-10 mx-10 my-20">
-        <aside class="w-full header primary-bg rounded-lg p-5 flex flex-col gap-3 text-white" id="countdownContainer">
+    <section class="flex md:flex-row flex-col justify-between md:m-10 mx-5 my-20">
+        <aside class="w-full header primary-bg rounded-lg md:p-5 p-px flex flex-col gap-3 text-white" id="countdownContainer">
             <div id="countdownText" class="text-center text-4xl font-bold mb-10">
                 <h2 id="eventNameHeader"></h2>
             </div>
             <div id="animatedNumbers" class="flex justify-evenly items-center">
                 <div class="flex flex-col items-center">
                     <div class="animated-number" id="daysValue">00</div>
-                    <p class="text-2xl font-semibold">DAYS</p>
+                    <p class="md:text-2xl text-sm font-semibold">DAYS</p>
                 </div>
                 <div class="flex flex-col items-center">
                     <div class="animated-number" id="hoursValue">00</div>
-                    <p class="text-2xl font-semibold">HOURS</p>
+                    <p class="md:text-2xl text-sm font-semibold">HOURS</p>
                 </div>
                 <div class="flex flex-col items-center">
                     <div class="animated-number" id="minutesValue">00</div>
-                    <p class="text-2xl font-semibold">MINUTES</p>
+                    <p class="md:text-2xl text-sm font-semibold">MINUTES</p>
                 </div>
                 <div class="flex flex-col items-center">
                     <div class="animated-number" id="secondsValue">00</div>
-                    <p class="text-2xl font-semibold">SECONDS</p>
+                    <p class="md:text-2xl text-sm font-semibold">SECONDS</p>
                 </div>
             </div>
         </aside>
 
         <main class="md:mx-5 md:mt-0 mt-5 md:w-2/5">
-            <aside class="md:order-last header white-bg rounded-lg py-5 px-8">
+            <aside class="md:order-last header white-bg rounded-lg py-5 md:px-8 px-4">
                 <label for="bgColor" class="text-xl">Select Background Color:</label>
                 <input type="color" id="bgColor" name="bgColor" value="#FD5B01" class="mb-3">
 

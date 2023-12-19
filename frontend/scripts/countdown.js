@@ -1,37 +1,51 @@
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Countdown script loaded.');
 
-    // Retrieve the countdown data from URL parameters
+    // Retrieve the index parameter from the URL
     const urlParams = new URLSearchParams(window.location.search);
-    const countdownDateParam = urlParams.get('countdownDate');
-    const eventNameParam = urlParams.get('eventName');
+    const indexParam = urlParams.get('index');
+    console.log('Index parameter:', indexParam);
 
-    if (!countdownDateParam || !eventNameParam) {
-        // Handle the case where countdown data is missing or invalid
-        console.error('Invalid countdown data in URL.');
+    if (indexParam === null || isNaN(indexParam)) {
+        // Handle the case where the index parameter is missing or invalid
+        console.error('Invalid index parameter.');
         return;
     }
 
-    const countdownDate = parseInt(countdownDateParam, 10);
-    const eventName = decodeURIComponent(eventNameParam);
+    const storedCountdowns = JSON.parse(localStorage.getItem('countdowns')) || [];
 
-    // Validate the countdown data
-    if (isNaN(countdownDate) || !eventName) {
-        console.error('Invalid countdown data in URL.');
+    // Validate the index parameter
+    if (indexParam < 0 || indexParam >= storedCountdowns.length) {
+        // Handle the case where the index parameter is out of bounds
+        console.error('Index out of bounds.');
         return;
     }
 
-    // Validate the event date and time
-    const eventDate = new Date(countdownDate);
+    const selectedCountdown = storedCountdowns[indexParam];
+    console.log('Selected countdown data:', selectedCountdown);
 
-    if (isNaN(eventDate.getTime())) {
-        console.error('Invalid event date for the shared countdown.');
+    // Validate the selected countdown data
+    if (!selectedCountdown.eventName || !selectedCountdown.eventDate) {
+        // Handle the case where data is missing or incomplete for the selected countdown
+        console.error('Selected countdown data is missing or incomplete.');
         return;
+    }
+
+    let eventDate = new Date(selectedCountdown.eventDate);  // Variable to store the event date
+
+    // Check if the event date is for the same day
+    const isSameDayEvent = isSameDay(new Date(), eventDate);
+
+    // If it's a same-day event and the event time is in the past, adjust the eventDate to tomorrow
+    if (isSameDayEvent && eventDate.getTime() < new Date().getTime()) {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        eventDate = tomorrow;
     }
 
     // Setting Event Name in Header:
     const eventNameHeader = document.getElementById('eventNameHeader');
-    eventNameHeader.innerText = eventName.toUpperCase();
+    eventNameHeader.innerText = selectedCountdown.eventName.toUpperCase();
 
     // Get the animated number elements
     const daysValue = document.getElementById('daysValue');
@@ -86,5 +100,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (userConfirmed) {
             window.location.href = 'mycountdowns.html';
         }
+    }
+
+    // Function to check if two dates are on the same day
+    function isSameDay(date1, date2) {
+        return (
+            date1.getFullYear() === date2.getFullYear() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getDate() === date2.getDate()
+        );
     }
 });

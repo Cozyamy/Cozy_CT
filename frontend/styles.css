@@ -225,4 +225,8 @@ nav {
     nav {
         display: none;
     }
+
+    .animated-number {
+        width: 50px;
+    }
 }
