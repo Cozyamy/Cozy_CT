@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg" sizes="32x32" href="images/logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <script defer src="scripts/hamburger.js"></script>
+</head>
+
+<body class="ct-timer">
+    <header class="sticky top-4 header flex justify-between py-px px-10 white-bg m-4 rounded-3xl items-center">
+        <img src="images/logo.svg" alt="Cozy_CT logo">
+        <div class="mobile-menu-container">
+            <input type="checkbox" id="mobile-menu">
+            <label for="mobile-menu" class="hamburger-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </label>
+            <div class="mobile-nav">
+                <a href="index.html" class="underline-animation transition duration-300">Home</a>
+                <a href="main.html" class="underline-animation">Set Countdown</a>
+                <a href="mycountdowns.html" class="underline-animation">My Countdowns</a>
+                <button id="mobileModeToggle" class="mt-2 self-center">
+                    <img src="images/moon.svg" alt="change mode button">
+                </button>
+            </div>
+        </div>
+        <nav class="">
+            <ul class="flex flex-row gap-5">
+                <li><a href="index.html" class="underline-animation transition duration-300">Home</a></li>
+                <li><a href="main.html" class="underline-animation">Set Countdown</a></li>
+                <li><a href="mycountdowns.html" class="underline-animation">My Countdowns</a></li>
+            </ul>
+            <button id="modeToggle">
+                <img src="images/moon.svg" alt="change mode button">
+            </button>
+        </nav>
+    </header>
+    <main>
+        <section class="mx-auto my-20 max-w-3xl">
+            <div class="flex flex-col px-5">
+                <h1 class="md:text-5xl text-2xl text-center font-bold primary-text mb-20">Welcome to Cozy Countdowns!
+                </h1>
+                <p class="md:text-2xl mb-10 text-center">You can start by setting up your own countdowns or you you can
+                    check on your countdowns</p>
+                <div class="flex flex-row justify-between items-center">
+                    <a href="main.html"
+                        class="primary-bg text-white py-2 px-4 rounded-lg focus:outline-none opacity-100 hover:opacity-80">Set
+                        Countdown</a>
+                    <a href="mycountdowns.html"
+                        class="primary-border primary-text hover:text-white primary-hover py-2 px-4 rounded-lg focus:outline-none">My
+                        Countdowns</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="scripts/mode.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+:root {
+    --black: #1A1A1A;
+    --white: #FFFFFF;
+    --paragraph-black: #292D32;
+    --input-bg: #F7F7F8;
+    --body-bg: #F4F4F4;
+    --primary-color: #FD5B01;
+
+    --font-family-base: "inter", Helvetica, Arial, sans-serif;
+
+    --font-size-xx-small: 10px;
+}
+
+/* Dark Mode */
+.ct-timer.dark-mode {
+    --black: #FFFFFF;
+    --white: #1A1A1A;
+    --paragraph-black: #FFFFFF;
+    --body-bg: #3d3b3b;
+}
+
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--body-bg);
+    color: var(--black);
+}
+
+.white-bg {
+    background-color: var(--white);
+}
+
+.header {
+    box-shadow: 0px 4px 4px 0px rgba(115, 38, 241, 0.04);
+}
+
+.primary-text {
+    color: var(--primary-color);
+}
+
+.primary-bg {
+    background-color: var(--primary-color);
+}
+
+.primary-border {
+    border: 1px solid var(--primary-color);
+}
+
+.primary-hover:hover {
+    background-color: var(--primary-color);
+}
+
+.primary-focus:focus {
+    border: 1px solid var(--primary-color);
+}
+
+/* --- HEADER --- */
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.underline-animation {
+    position: relative;
+    color: var(--paragraph-black);
+    text-decoration: none;
+}
+
+.underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: -5px;
+    border-radius: 30%;
+    left: 0;
+    background-color: var(--primary-color);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.mobile-menu-container {
+    display: none;
+}
+
+#mobile-menu {
+    display: none;
+}
+
+.hamburger-icon {
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    transition: transform 0.4s, opacity 0.4s;
+}
+
+#mobile-menu:checked+.hamburger-icon .bar:first-child {
+    transform: rotate(-45deg) translate(-5px, 5px);
+    background-color: var(--primary-color);
+}
+
+#mobile-menu:checked+.hamburger-icon .bar:nth-child(2) {
+    opacity: 0;
+}
+
+#mobile-menu:checked+.hamburger-icon .bar:last-child {
+    transform: rotate(45deg) translate(-5px, -4px);
+    background-color: var(--primary-color);
+}
+
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 96px;
+    right: 30px;
+    background-color: var(--white);
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.mobile-nav a {
+    padding: 10px;
+    text-decoration: none;
+    color: var(--paragraph-black);
+    transition: background-color 0.3s;
+}
+
+.mobile-nav a:hover {
+    background-color: #f0f0f0;
+}
+
+/* --- MAIN --- */
+
+/* COUNTDOWN PAGE */
+.animated-number {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100px;
+    height: auto;
+    text-align: center;
+    margin: 5px;
+    animation: fadeInUp 0.8s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#daysValue {
+    color: #ff5733;
+}
+
+#hoursValue {
+    color: #33ff57;
+}
+
+#minutesValue {
+    color: #5733ff;
+}
+
+#secondsValue {
+    color: #ff3366;
+}
+
+#countdownList li:hover {
+    color: var(--primary-color);
+}
+
+/* --- Media query --- */
+@media (max-width: 767px) {
+    .mobile-menu-container {
+        display: block;
+    }
+
+    #mobile-menu {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: none;
+    }
+
+    .bar {
+        background-color: var(--paragraph-black);
+        margin: 2px 0;
+        transition: transform 0.4s, opacity 0.4s;
+    }
+
+    #mobile-menu:checked+.mobile-nav {
+        display: flex;
+    }
+
+    nav {
+        display: none;
+    }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg" sizes="32x32" href="images/logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <script defer src="scripts/hamburger.js"></script>
+</head>
+
+<body class="ct-timer">
+    <header class="sticky top-4 header flex justify-between py-px px-10 white-bg m-4 rounded-3xl items-center">
+        <img src="images/logo.svg" alt="Cozy_CT logo">
+        <div class="mobile-menu-container">
+            <input type="checkbox" id="mobile-menu">
+            <label for="mobile-menu" class="hamburger-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </label>
+            <div class="mobile-nav">
+                <a href="index.html" class="underline-animation transition duration-300">Home</a>
+                <a href="main.html" class="underline-animation">Set Countdown</a>
+                <a href="mycountdowns.html" class="underline-animation">My Countdowns</a>
+                <button id="mobileModeToggle" class="mt-2 self-center">
+                    <img src="images/moon.svg" alt="change mode button">
+                </button>
+            </div>
+        </div>
+        <nav class="">
+            <ul class="flex flex-row gap-5">
+                <li><a href="index.html" class="underline-animation transition duration-300">Home</a></li>
+                <li><a href="main.html" class="underline-animation">Set Countdown</a></li>
+                <li><a href="mycountdowns.html" class="underline-animation">My Countdowns</a></li>
+            </ul>
+            <button id="modeToggle">
+                <img src="images/moon.svg" alt="change mode button">
+            </button>
+        </nav>
+    </header>
+    <section class="flex md:flex-row flex-col justify-between md:m-10 mx-10 my-20">
+        <aside class=" md:w-full  header white-bg rounded-lg py-5 md:px-10 px-5">
+            <div class="flex flex-row items-center justify-center">
+                <h1 class="md:text-center md:text-2xl text-xl mb-3 font-semibold">Set Your Countdown</h1>
+                <img src="images/Animation - 1702417296546.gif" alt="hourglass gif"
+                    class="md:h-24 md:w-24 h-14 w-14 self-center md:hidden">
+            </div>
+            <form id="countdownForm" class="flex flex-col gap-3">
+                <label for="eventName">Event Name:</label>
+                <input type="text" id="eventName" placeholder="Enter event name"
+                    class="bg-transparent border border-slate-300 rounded-lg px-6 py-3 focus:outline-none primary-focus"
+                    required>
+
+                <label for="eventDate">Event Date:</label>
+                <input type="date" id="eventDate"
+                    class="bg-transparent border border-slate-300 rounded-lg px-6 py-3 focus:outline-none primary-focus"
+                    required>
+
+                <label for="eventTime">Event Time:</label>
+                <input type="time" id="eventTime"
+                    class="bg-transparent border border-slate-300 rounded-lg px-6 py-3 focus:outline-none primary-focus"
+                    required>
+
+                <label for="timezone" class="mt-2">Select Timezone:</label>
+                <select id="timezone" required
+                    class="primary-text bg-transparent border border-slate-300 rounded-lg px-6 py-3  focus:outline-none primary-focus">
+                    <option value="Africa/Lagos">West Africa Time (WAT)</option>
+                    <option value="UTC">UTC (Coordinated Universal Time)</option>
+                    <option value="America/New_York">Eastern Time (ET)</option>
+                    <option value="America/Chicago">Central Time (CT)</option>
+                    <option value="America/Denver">Mountain Time (MT)</option>
+                    <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                    <option value="America/Anchorage">Alaska Time (AKT)</option>
+                    <option value="Pacific/Honolulu">Hawaii-Aleutian Time (HST)</option>
+                    <option value="Europe/London">GMT (Greenwich Mean Time)</option>
+                    <option value="Europe/Paris">Central European Time (CET)</option>
+                    <option value="Europe/Berlin">Central European Time (CET)</option>
+                    <option value="Europe/Athens">Eastern European Time (EET)</option>
+                    <option value="Asia/Tokyo">Japan Standard Time (JST)</option>
+                    <option value="Asia/Shanghai">China Standard Time (CST)</option>
+                    <option value="Asia/Kolkata">Indian Standard Time (IST)</option>
+                    <option value="Australia/Sydney">Australian Eastern Time (AET)</option>
+                    <option value="Pacific/Auckland">New Zealand Standard Time (NZST)</option>
+                    <option value="Africa/Cairo">Eastern European Time (EET)</option>
+                    <option value="Africa/Johannesburg">South Africa Standard Time (SAST)</option>
+                    <option value="America/Mexico_City">Central Time (CT) - Mexico</option>
+                    <option value="America/Toronto">Eastern Time (ET) - Toronto</option>
+                    <option value="America/Vancouver">Pacific Time (PT) - Vancouver</option>
+                    <option value="Asia/Dubai">Gulf Standard Time (GST)</option>
+                    <option value="Asia/Hong_Kong">Hong Kong Time (HKT)</option>
+                    <option value="Europe/Moscow">Moscow Time (MSK)</option>
+                    <option value="Europe/Istanbul">Turkey Time (TRT)</option>
+                    <option value="Asia/Bangkok">Indochina Time (ICT)</option>
+                    <option value="Asia/Kuala_Lumpur">Malaysia Time (MYT)</option>
+                    <option value="Pacific/Noumea">New Caledonia Time (NCT)</option>
+                </select>
+                <button type="button" onclick="startCountdown()"
+                    class="primary-bg text-white py-2 px-4 rounded-lg focus:outline-none opacity-100 hover:opacity-80 mt-4">Start
+                    Countdown</button>
+            </form>
+        </aside>
+
+        <main class="w-full md:mx-5 md:mt-0 mt-5">
+            <div id="previewSection"
+                class="header border border-black primary-bg rounded-lg p-5 flex flex-col gap-3 text-white">
+                <img src="images/Animation - 1702417296546.gif" alt="hourglass gif"
+                    class="md:h-24 md:w-24 h-14 w-14 self-center hidden md:block">
+                <div id="previewEventName" class="text-center text-2xl">Event Name</div>
+                <div id="previewEventDate" class="text-5xl text-center">Event Date</div>
+                <div id="previewEventTime" class="text-center">Event Time</div>
+                <div id="previewTimezone" class="text-center">Timezone</div>
+            </div>
+        </main>
+    </section>
+
+    <script src="scripts/script.js"></script>
+    <script src="scripts/mode.js"></script>
+</body>
+
+</html>
